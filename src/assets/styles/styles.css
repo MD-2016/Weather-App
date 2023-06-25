@@ -1,0 +1,33 @@
+*::before, *::after  {
+    box-sizing: border-box;
+}
+
+:root {
+    --border-radius: 20px;
+}
+
+.layout {
+    width: 22.5rem;
+    height: 50rem;
+    display: grid;
+    grid: "sidebar main" 1fr / auto 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.main {
+    grid-area: main;
+}
+
+.heroText {
+    padding: 2.5rem;
+    margin-bottom: 4.5rem;
+}
+
+.btn {
+    border-radius: var(--border-radius)
+}
