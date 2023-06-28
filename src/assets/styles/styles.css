@@ -18,7 +18,7 @@ body {
 }
 
 .sidebar {
-    display:none;
+    display: none;
 }
 
 .btn {
@@ -29,10 +29,18 @@ body {
     font-size: 1.2rem;
 }
 
+.wrapper {
+    display: grid; 
+}
+
 @media(width  > 430px) {
     .heroText {
         font-size: 2rem;
     }
 
-    
+   .wrapper {
+    grid-template-columns: 0.15fr 1fr;
+    grid-template-rows: 1fr;
+   }
+
 }
