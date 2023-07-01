@@ -29,18 +29,34 @@ body {
     font-size: 1.2rem;
 }
 
-.wrapper {
-    display: grid; 
-}
+
+.smallBtn {
+    border-radius: var(--border-radius);
+   }
 
 @media(width  > 430px) {
     .heroText {
         font-size: 2rem;
     }
 
-   .wrapper {
-    grid-template-columns: 0.15fr 1fr;
-    grid-template-rows: 1fr;
+   .smallBtn {
+        width: 2.5rem;
+        height: 2.5rem;
    }
+
+   .tabs {
+    display: flex;
+    flex-direction: row;
+    gap: 300px;    
+    place-content: center;
+    margin-top: 15rem;
+   }
+
+   .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+   }
+   
 
 }
