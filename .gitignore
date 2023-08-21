@@ -27,3 +27,4 @@
 # Go workspace file
 go.work
 .devenv
+.devenv
