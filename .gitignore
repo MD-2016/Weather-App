@@ -10,10 +10,6 @@
 *.env
 *node_modules
 *.devenv
-*.direnv
-*.envrc
-*flake.nix
-*flake.lock
 
 # Test binary, built with `go test -c`
 *.test
