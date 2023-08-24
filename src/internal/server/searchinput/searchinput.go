@@ -44,3 +44,7 @@ func ValidateAirportCode(input string) bool {
 
 	return true
 }
+
+func ValidateCity(input string) bool {
+
+}
