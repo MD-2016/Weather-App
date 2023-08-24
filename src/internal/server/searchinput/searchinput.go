@@ -26,7 +26,7 @@ func ProcessInput(wi WeatherInput) {
 func ValidateZipCode(input string) bool {
 	validateZip, err := regexp.MatchString("/^\\d{5}$", input)
 
-	if validateZip == false || err != nil {
+	if !validateZip || err != nil {
 		log.Fatal("zip code is not valid")
 		return false
 	}
@@ -37,7 +37,7 @@ func ValidateZipCode(input string) bool {
 func ValidateAirportCode(input string) bool {
 	validateAircode, err := regexp.MatchString("/^[A-Za-z]{3}$", input)
 
-	if validateAircode == false || err != nil {
+	if !validateAircode || err != nil {
 		log.Fatal("airport code is not valid")
 		return false
 	}
