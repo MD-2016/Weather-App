@@ -1,26 +1,37 @@
-package searchinput
+package validateInput
 
 import (
 	"log"
 	"regexp"
 )
 
-const WEATHER_API = "https://api.weatherapi.com/v1"
+//const WEATHER_API = "https://api.weatherapi.com/v1"
 
+/*
 type InputType int
 
 const (
 	Zip InputType = iota
 	AirportCode
 )
+*/
 
 type WeatherInput struct {
 	Input string
-	Type  InputType
 }
 
-func ProcessInput(wi WeatherInput) {
+func ValidateInput(wi WeatherInput) bool {
+	inputCorrect := false
+	if firstChar, _ := regexp.MatchString("^[0-9]$", wi.Input[0:1]); firstChar {
+		inputCorrect = ValidateZipCode(wi.Input)
+		return inputCorrect
+	} else if len(wi.Input) == 3 {
+		inputCorrect = ValidateAirportCode(wi.Input)
+		return inputCorrect
+	}
 
+	inputCorrect = ValidateCity(wi.Input)
+	return inputCorrect
 }
 
 func ValidateZipCode(input string) bool {
@@ -46,5 +57,12 @@ func ValidateAirportCode(input string) bool {
 }
 
 func ValidateCity(input string) bool {
+	validateCity, err := regexp.MatchString("^[A-Za-z ]*$", input)
 
+	if !validateCity || err != nil {
+		log.Fatal("city is not valid")
+		return false
+	}
+
+	return true
 }

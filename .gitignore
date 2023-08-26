@@ -11,8 +11,6 @@
 *node_modules
 *.devenv
 .direnv
-flake.nix
-flake.lock
 # Test binary, built with `go test -c`
 *.test
 
