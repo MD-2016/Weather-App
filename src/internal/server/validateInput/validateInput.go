@@ -3,6 +3,7 @@ package validateInput
 import (
 	"log"
 	"regexp"
+	"strings"
 )
 
 //const WEATHER_API = "https://api.weatherapi.com/v1"
@@ -25,12 +26,14 @@ func ValidateInput(wi WeatherInput) bool {
 	if firstChar, _ := regexp.MatchString("^[0-9]$", wi.Input[0:1]); firstChar {
 		inputCorrect = ValidateZipCode(wi.Input)
 		return inputCorrect
-	} else if len(wi.Input) == 3 {
+	}
+
+	if len(wi.Input) == 3 && strings.ToUpper(wi.Input) == wi.Input {
 		inputCorrect = ValidateAirportCode(wi.Input)
-		return inputCorrect
 	}
 
 	inputCorrect = ValidateCity(wi.Input)
+
 	return inputCorrect
 }
 
