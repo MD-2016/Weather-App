@@ -6,8 +6,6 @@ import (
 	"strings"
 )
 
-//const WEATHER_API = "https://api.weatherapi.com/v1"
-
 /*
 type InputType int
 
