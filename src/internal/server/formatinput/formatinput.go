@@ -15,12 +15,13 @@ type WeatherURL struct {
 }
 
 func FormatWeatherApiCall(input string) string {
+	apiCall := WeatherURL{}
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatalf("error loading .env file: %s", err)
 	}
 	apiKey := os.Getenv("WEATHER_API_KEY")
-	apiCall := fmt.Sprintf(WEATHER_API+"%s&q=%s", apiKey, input)
+	apiCall.formattedURL = fmt.Sprintf(WEATHER_API+"%s&q=%s", apiKey, input)
 
-	return apiCall
+	return apiCall.formattedURL
 }
