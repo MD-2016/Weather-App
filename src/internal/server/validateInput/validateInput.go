@@ -15,22 +15,22 @@ const (
 )
 */
 
-type WeatherInput struct {
-	Input string
-}
-
-func ValidateInput(wi WeatherInput) bool {
+func ValidateInput(input string) bool {
 	inputCorrect := false
-	if firstChar, _ := regexp.MatchString("^[0-9]$", wi.Input[0:1]); firstChar {
-		inputCorrect = ValidateZipCode(wi.Input)
+
+	if input == "" {
+		return inputCorrect
+	}
+	if firstChar, _ := regexp.MatchString("^[0-9]$", input[0:1]); firstChar {
+		inputCorrect = ValidateZipCode(input)
 		return inputCorrect
 	}
 
-	if len(wi.Input) == 3 && strings.ToUpper(wi.Input) == wi.Input {
-		inputCorrect = ValidateAirportCode(wi.Input)
+	if len(input) == 3 && strings.ToUpper(input) == input {
+		inputCorrect = ValidateAirportCode(input)
 	}
 
-	inputCorrect = ValidateCity(wi.Input)
+	inputCorrect = ValidateCity(input)
 
 	return inputCorrect
 }
