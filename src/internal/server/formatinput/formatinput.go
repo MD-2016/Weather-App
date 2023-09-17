@@ -25,7 +25,7 @@ func FormatWeatherApiCall(input string) string {
 		log.Fatal("input is not valid for the api call")
 	}
 	apiKey := os.Getenv("WEATHER_API_KEY")
-	apiCall.formattedURL = fmt.Sprintf(WEATHER_API+"%s&q=%s&days=1&aqi=no&alerts=no", apiKey, input)
+	apiCall.formattedURL = fmt.Sprintf(WEATHER_API+"%s&q=%s&days=10&aqi=no&alerts=no", apiKey, input)
 
 	return apiCall.formattedURL
 }
