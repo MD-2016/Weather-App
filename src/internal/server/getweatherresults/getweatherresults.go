@@ -73,6 +73,11 @@ func getWeather() {
 			log.Fatal("error with decoding the json call")
 		}
 
+		// successful call which means we can pass into other page
+		temp := template.Must(template.ParseFiles("../../../pages/city.html"))
+
+		temp.Execute(w, weatherResponse)
+		return
 	})
 
 }

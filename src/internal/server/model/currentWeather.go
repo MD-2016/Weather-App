@@ -6,8 +6,8 @@ type Weather struct {
 		Country string `json:"country"`
 	} `json:"location"`
 	Current struct {
-		TempF     string `json:"temp_f`
-		TempC     string `json:"temp_c`
+		TempF     string `json:"temp_f"`
+		TempC     string `json:"temp_c"`
 		Condition struct {
 			Text string `json:"text"`
 			Icon string `json:"icon"`

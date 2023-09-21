@@ -14,17 +14,25 @@
         </div>
         <div class="body">
             <section class="header">
-                <div class="selectedCity"></div>
-                <div class="unitChoice">
-                    <a class="smallBtn">C</a>
-                    |
-                    <a class="smallBtn">F</a>
-                </div>
+                <div class="selectedCity">{{.Location.Name}}</div>
             </section>
             <section class="tabs">
                 <details>
-                    <summary>Daily</summary>
-                    {{/* Table of parsed daily weather data for a given city*/}}
+                    <summary>Current</summary>
+                    <table>
+                    <th>
+                        <tr>Fahrenheit Temperature</tr>
+                        <tr>Celsius Temp</tr>
+                        <tr>Condition</tr>
+                    </th>
+                    <tr>
+                        <td>{{.Current.TempF}}</td>
+                        <td>{{.Current.TempC}}</td>
+                        <td>
+                            {{.Condition.Text}} <img alt="condition" src="{{.Condition.Icon}}" />
+                        </td>
+                    </tr>
+                    </table>
                 </details>
                 <details>
                     <summary>Hourly</summary>
