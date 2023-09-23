@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/MD-2016/Weather-App/src/internal/server/validateInput"
+	"github.com/MD-2016/Weather-App/src/server/validateInput"
 	"github.com/joho/godotenv"
 )
 
