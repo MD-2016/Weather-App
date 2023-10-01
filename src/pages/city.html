@@ -20,11 +20,11 @@
                 <details>
                     <summary>Current</summary>
                     <table>
-                    <th>
-                        <tr>Fahrenheit Temperature</tr>
-                        <tr>Celsius Temp</tr>
-                        <tr>Condition</tr>
-                    </th>
+                    <tr>
+                        <th>Fahrenheit Temperature</th>
+                        <th>Celsius Temp</th>
+                        <th>Condition</th>
+                    </tr>
                     <tr>
                         <td>{{.Current.TempF}}</td>
                         <td>{{.Current.TempC}}</td>
@@ -36,7 +36,24 @@
                 </details>
                 <details>
                     <summary>Hourly</summary>
-                    {{/* Table of parsed Hourly weather data for a given city*/}}
+                    <table>
+                        <tr>
+                            <th>Time</th>
+                            <th>Fahrenheit Temperature</th>
+                            <th>Celsius Temperature</th>
+                            <th>Condition</th>
+                        </tr>
+                        {{range .Hour}}
+                            <tr>
+                                <td>{{.Hour.Time}}</td>
+                                <td>{{.Hour.TempF}}</td>
+                                <td>{{.Hour.TempC}}</td>
+                                <td>
+                                    {{.Hour.Condition.Text}} <img alt="hourly condition" src="{{.Hour.Condition.Icon}}"/>
+                                </td>
+                            </tr>
+                        {{end}}
+                    </table>
                 </details>
             </section>
         </div>

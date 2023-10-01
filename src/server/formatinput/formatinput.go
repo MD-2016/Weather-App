@@ -9,7 +9,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const WEATHER_API = "http//api.weatherapi.com/v1/forecast.json?key="
+const WEATHER_API = "https://api.weatherapi.com/v1/forecast.json?key="
 
 type WeatherURL struct {
 	formattedURL string
