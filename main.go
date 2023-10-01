@@ -66,13 +66,14 @@ func search(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 
 	if err := json.NewDecoder(resp.Body).Decode(&weatherResponse); err != nil {
-		log.Fatal("error with decoding json call")
+		log.Fatal(err)
 		return
 	}
 
-	http.Redirect(w, r, "./src/pages/city.html", 0)
 	temp := template.Must(template.ParseFiles("./src/pages/city.html"))
 
 	temp.Execute(w, weatherResponse)
-	return
+
+	http.Redirect(w, r, "./src/pages/city.html", http.StatusOK)
+
 }
