@@ -27,6 +27,8 @@ func main() {
 
 	// display results on city page
 	http.HandleFunc("/", start)
+	styles := http.FileServer(http.Dir("./src/assets/styles"))
+	http.Handle("/styles/", http.StripPrefix("/styles/", styles))
 	http.HandleFunc("/search", search)
 	http.ListenAndServe(":8080", nil)
 }
