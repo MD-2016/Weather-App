@@ -13,10 +13,60 @@
             <h1 class="heroText">
                 Check the forecast for your city of choice
             </h1>
-            <form action="/search" method="get" class="search">
-                <input type="search" name="searchBox" id="searchBox">             
+            <form action="/search" method="GET" class="search">
+                <input type="search" name="city" id="city">             
             </form>
     </section>
+    <div class="wrapper">
+        <div class="sidebar">
+            <p>Generated text</p>
+        </div>
+        <div class="body">
+            <section class="header">
+                <div class="selectedCity">{{.Location.Name}}</div>
+            </section>
+            <section class="tabs">
+                <details>
+                    <summary>Current</summary>
+                    <table>
+                    <tr>
+                        <th>Fahrenheit Temperature</th>
+                        <th>Celsius Temp</th>
+                        <th>Condition</th>
+                    </tr>
+                    <tr>
+                        <td>{{.Current.TempF}}</td>
+                        <td>{{.Current.TempC}}</td>
+                        <td>
+                            {{.Condition.Text}} <img alt="condition" src="{{.Condition.Icon}}" />
+                        </td>
+                    </tr>
+                    </table>
+                </details>
+                <details>
+                    <summary>Hourly</summary>
+                    <table>
+                        <tr>
+                            <th>Time</th>
+                            <th>Fahrenheit Temperature</th>
+                            <th>Celsius Temperature</th>
+                            <th>Condition</th>
+                        </tr>
+                        {{range .Hour}}
+                            <tr>
+                                <td>{{.Hour.Time}}</td>
+                                <td>{{.Hour.TempF}}</td>
+                                <td>{{.Hour.TempC}}</td>
+                                <td>
+                                    {{.Hour.Condition.Text}} <img alt="hourly condition" src="{{.Hour.Condition.Icon}}"/>
+                                </td>
+                            </tr>
+                        {{end}}
+                    </table>
+                </details>
+            </section>
+        </div>
+    </div>
     <footer>
         <p> Powered by
         <a href="https://www.weatherapi.com/" title="Free Weather API"><img src='//cdn.weatherapi.com/v4/images/weatherapi_logo.png' alt="Weather data by WeatherAPI.com" border="0"></a>
