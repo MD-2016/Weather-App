@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -29,9 +28,8 @@ func main() {
 	http.HandleFunc("/", start)
 	styles := http.FileServer(http.Dir("./src/assets/styles"))
 	http.Handle("/styles/", http.StripPrefix("/styles/", styles))
-	badInput := http.FileServer(http.Dir("./src/pages/404.html"))
-	http.Handle("/bad", http.StripPrefix("/bad", badInput))
 	http.HandleFunc("/search", searchHandler)
+	http.HandleFunc("/search/{city}", searchHandler)
 	//http.HandleFunc("/search/", searchCityHandler)
 	http.ListenAndServe(":8080", nil)
 
@@ -46,27 +44,27 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	//tmpl := template.Must(template.ParseFiles("./src/pages/index.html"))
 	inputToParse := r.URL.Query().Get("city")
 	if inputToParse == "" {
-
+		return
 	} else {
-		fmt.Println(inputToParse)
 		weatherRes := model.Weather{}
 		formattedCall := formatinput.FormatWeatherApiCall(inputToParse)
-		fmt.Println(formattedCall)
 		res, err := http.Get(formattedCall)
 
-		fmt.Println(res)
-
-		if res.StatusCode != 200 {
+		if err != nil || res.StatusCode != http.StatusOK {
 			log.Fatal(err)
 			return
 		}
+
 		defer res.Body.Close()
 
-		if err := json.NewDecoder(r.Body).Decode(&weatherRes); err != nil {
-			fmt.Println(err)
+		if err := json.NewDecoder(res.Body).Decode(&weatherRes); err != nil {
 			log.Fatal(err)
 			return
 		}
+
+		tmpl := template.Must(template.ParseFiles("./src/pages/city.html"))
+		tmpl.Execute(w, weatherRes)
+		return
 
 	}
 
