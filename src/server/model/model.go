@@ -1,5 +1,43 @@
 package model
 
+type Location struct {
+	Name    string `json:"name"`
+	Country string `json:"country"`
+}
+
+type Condition struct {
+	Text string `json:"text"`
+	Icon string `json:"icon"`
+}
+
+type Current struct {
+	TempC     float64   `json:"temp_c"`
+	TempF     float64   `json:"temp_f"`
+	Condition Condition `json:"condition"`
+}
+
+type Hour struct {
+	Time      string    `json:"time"`
+	TempC     float64   `json:"temp_c"`
+	TempF     float64   `json:"temp_f"`
+	Condition Condition `json:"condition"`
+}
+
+type ForecastDay struct {
+	Hour []Hour `json:"hour"`
+}
+
+type Forecast struct {
+	ForecastDay []ForecastDay `json:"forecastday"`
+}
+
+type Weather struct {
+	Location Location `json:"location"`
+	Current  Current  `json:"current"`
+	Forecast Forecast `json:"forecast"`
+}
+
+/*
 type Weather struct {
 	Location struct {
 		Name    string `json:"name"`
@@ -28,7 +66,7 @@ type Weather struct {
 		} `json:"forecastday"`
 	} `json:"forecast"`
 }
-
+*/
 /*
 type Weather struct {
 	Location struct {
