@@ -16,7 +16,7 @@ type Current struct {
 	Condition Condition `json:"condition"`
 }
 
-type Hour struct {
+type HourlyForecast struct {
 	Time      string    `json:"time"`
 	TempC     float64   `json:"temp_c"`
 	TempF     float64   `json:"temp_f"`
@@ -24,7 +24,7 @@ type Hour struct {
 }
 
 type ForecastDay struct {
-	Hour []Hour `json:"hour"`
+	Hour []HourlyForecast `json:"hour"`
 }
 
 type Forecast struct {
