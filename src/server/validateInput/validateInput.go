@@ -28,6 +28,7 @@ func ValidateInput(input string) bool {
 
 	if len(input) == 3 && strings.ToUpper(input) == input {
 		inputCorrect = ValidateAirportCode(input)
+		return inputCorrect
 	}
 
 	inputCorrect = ValidateCity(input)
@@ -36,7 +37,8 @@ func ValidateInput(input string) bool {
 }
 
 func ValidateZipCode(input string) bool {
-	validateZip, err := regexp.MatchString("/^\\d{5}$", input)
+	//validateZip, err := regexp.MatchString("/^\\d{5}$", input)
+	validateZip, err := regexp.MatchString("^\\d{5}(?:[-\\s]\\d{4})?$", input)
 
 	if !validateZip || err != nil {
 		log.Fatal("zip code is not valid")
