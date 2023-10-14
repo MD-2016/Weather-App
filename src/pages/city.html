@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/styles.css">
     <link rel="stylesheet" href="/styles/pico-1.5.9/css/pico.min.css">
-    <title></title>
+    <title>{{.Location.Name}} Forecast</title>
 </head>
 <body>
     <div class="wrapper">
@@ -43,16 +43,16 @@
                             <th>Celsius Temperature</th>
                             <th>Condition</th>
                         </tr>
-                        {{range .Hour}}
+                        {{range $forecast := .Forecast.ForecastDay}}
+                            {{range $hourly := $forecast.Hour}}
                             <tr>
-                                <td>{{.Hour.Time}}</td>
-                                <td>{{.Hour.TempF}}</td>
-                                <td>{{.Hour.TempC}}</td>
-                                <td>
-                                    {{.Hour.Condition.Text}} <img alt="hourly condition" src="{{.Hour.Condition.Icon}}"/>
-                                </td>
+                                <td>{{$hourly.Time}}</td>
+                                <td>{{$hourly.TempF}}</td> 
+                                <td>{{$hourly.TempC}}</td>
+                                <td>{{$hourly.Condition.Text}}  <img src="{{$hourly.Condition.Icon}}" alt="{{$hourly.Condition.Text}}" /></td>
                             </tr>
-                        {{end}}
+                            {{end}}
+                            {{end}}
                     </table>
                 </details>
             </section>
