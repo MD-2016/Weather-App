@@ -37,7 +37,6 @@ func ValidateInput(input string) bool {
 }
 
 func ValidateZipCode(input string) bool {
-	//validateZip, err := regexp.MatchString("/^\\d{5}$", input)
 	validateZip, err := regexp.MatchString("^\\d{5}(?:[-\\s]\\d{4})?$", input)
 
 	if !validateZip || err != nil {
@@ -49,7 +48,7 @@ func ValidateZipCode(input string) bool {
 }
 
 func ValidateAirportCode(input string) bool {
-	validateAircode, err := regexp.MatchString("/^[A-Za-z]{3}$", input)
+	validateAircode, err := regexp.MatchString("^[A-Z]{3}$", input)
 
 	if !validateAircode || err != nil {
 		log.Fatal("airport code is not valid")
