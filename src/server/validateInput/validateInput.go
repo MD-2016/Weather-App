@@ -59,7 +59,7 @@ func ValidateAirportCode(input string) bool {
 }
 
 func ValidateCity(input string) bool {
-	validateCity, err := regexp.MatchString("^[A-Za-z ]*$", input)
+	validateCity, err := regexp.MatchString("^[A-Za-z]*$", input)
 
 	if !validateCity || err != nil {
 		log.Fatal("city is not valid")
