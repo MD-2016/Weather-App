@@ -21,13 +21,11 @@
                     <summary>Current</summary>
                     <table>
                     <tr>
-                        <th>Fahrenheit Temperature</th>
-                        <th>Celsius Temp</th>
+                        <th>Temperature</th>
                         <th>Condition</th>
                     </tr>
                     <tr>
-                        <td>{{.Current.TempF}}</td>
-                        <td>{{.Current.TempC}}</td>
+                        <td>{{.Current.TempF}} / {{.Current.TempC}}</td>
                         <td>
                             {{.Current.Condition.Text}} <img alt="condition" src="{{.Current.Condition.Icon}}" />
                         </td>
@@ -39,16 +37,14 @@
                     <table>
                         <tr>
                             <th>Time</th>
-                            <th>Fahrenheit Temperature</th>
-                            <th>Celsius Temperature</th>
+                            <th>Temperature</th>
                             <th>Condition</th>
                         </tr>
                         {{range $forecast := .Forecast.ForecastDay}}
                             {{range $hourly := $forecast.Hour}}
                             <tr>
                                 <td>{{$hourly.Time}}</td>
-                                <td>{{$hourly.TempF}}</td> 
-                                <td>{{$hourly.TempC}}</td>
+                                <td>{{$hourly.TempF}} / {{$hourly.TempC}}</td> 
                                 <td>{{$hourly.Condition.Text}}  <img src="{{$hourly.Condition.Icon}}" alt="{{$hourly.Condition.Text}}" /></td>
                             </tr>
                             {{end}}
