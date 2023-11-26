@@ -8,13 +8,30 @@ import (
 
 	"github.com/MD-2016/Weather-App/src/server/formatinput"
 	"github.com/MD-2016/Weather-App/src/server/model"
+	"github.com/didip/tollbooth/v7"
 )
 
 type FormInput struct {
 	UserInput string
 }
 
+type Message struct {
+	Status string `json:"status"`
+	Body   string `json:"body"`
+}
+
 func main() {
+
+	// rate limit for too many api calls
+	message := Message{
+		Status: "Request Failed too many requests",
+		Body:   "The API rwached capacity, try again later",
+	}
+
+	apiError, _ := json.Marshal(message)
+	limiter := tollbooth.NewLimiter(3, nil)
+	limiter.SetMessageContentType("application/json")
+	limiter.SetMessage(string(apiError))
 
 	// get the user input
 
@@ -29,7 +46,7 @@ func main() {
 	styles := http.FileServer(http.Dir("./src/assets/styles"))
 	http.Handle("/styles/", http.StripPrefix("/styles/", styles))
 	http.HandleFunc("/search", searchHandler)
-	http.HandleFunc("/search/{city}", searchHandler)
+	http.Handle("/search/{city}", tollbooth.LimitFuncHandler(limiter, searchHandler))
 	//http.HandleFunc("/search/", searchCityHandler)
 	http.ListenAndServe(":8080", nil)
 
@@ -48,6 +65,7 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		weatherRes := model.Weather{}
 		formattedCall := formatinput.FormatWeatherApiCall(inputToParse)
+
 		res, err := http.Get(formattedCall)
 
 		if err != nil || res.StatusCode != http.StatusOK {
