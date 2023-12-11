@@ -2,16 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/MD-2016/Weather-App/src/server/formatinput"
 	"github.com/MD-2016/Weather-App/src/server/model"
-	"github.com/didip/tollbooth/v7"
-	"github.com/didip/tollbooth/v7/limiter"
 )
 
 type FormInput struct {
@@ -24,22 +20,23 @@ type Message struct {
 }
 
 func main() {
+	/*
+		// rate limit for too many api calls
+		message := Message{
+			Status: "Request Failed too many requests",
+			Body:   "The API rwached capacity, try again later",
+		}
 
-	// rate limit for too many api calls
-	message := Message{
-		Status: "Request Failed too many requests",
-		Body:   "The API rwached capacity, try again later",
-	}
-
-	apiError, _ := json.Marshal(message)
-	//lmt := tollbooth.NewLimiter(1, nil)
-	lmt := tollbooth.NewLimiter(1, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Hour})
-	lmt.SetMessageContentType("application/json")
-	lmt.SetMessage(string(apiError))
-	lmt.SetMethods([]string{"GET"})
-	lmt.SetOnLimitReached(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("Request limit is reached")
-	})
+		apiError, _ := json.Marshal(message)
+		lmt := tollbooth.NewLimiter(1, nil)
+		lmt := tollbooth.NewLimiter(1, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Hour})
+		lmt.SetMessageContentType("application/json")
+		lmt.SetMessage(string(apiError))
+		lmt.SetMethods([]string{"GET"})
+		lmt.SetOnLimitReached(func(w http.ResponseWriter, r *http.Request) {
+			fmt.Println("Request limit is reached")
+		})
+	*/
 
 	// get the user input
 
@@ -53,7 +50,8 @@ func main() {
 	http.HandleFunc("/", start)
 	styles := http.FileServer(http.Dir("./src/assets/styles"))
 	http.Handle("/styles/", http.StripPrefix("/styles/", styles))
-	http.Handle("/search", tollbooth.LimitFuncHandler(lmt, searchHandler))
+	//http.Handle("/search", tollbooth.LimitFuncHandler(lmt, searchHandler))
+	http.HandleFunc("/search", searchHandler)
 	http.HandleFunc("/search/{city}", searchHandler)
 	//http.HandleFunc("/search/", searchCityHandler)
 	http.ListenAndServe(":8080", nil)
