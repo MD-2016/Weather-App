@@ -48,7 +48,7 @@ func ValidateZipCode(input string) bool {
 }
 
 func ValidateAirportCode(input string) bool {
-	validateAircode, err := regexp.MatchString("^[A-Z]{3}$", input)
+	validateAircode, err := regexp.MatchString("^[A-Za-z]{3}$", input)
 
 	if !validateAircode || err != nil {
 		log.Fatal("airport code is not valid")
@@ -60,11 +60,18 @@ func ValidateAirportCode(input string) bool {
 
 func ValidateCity(input string) bool {
 	validateCity, err := regexp.MatchString("^[A-Za-z]*$", input)
-	validateSameNameCityDifferentState, nexterr := regexp.MatchString("^[A-Za-z]+,\\s*[A-Za-z]{2}$", input)
+	validateSameNameCityDifferentState, nexterr := regexp.MatchString("^[A-Za-z]+,*[A-Za-z]{2}$", input)
 
-	if (!validateCity || err != nil) || (!validateSameNameCityDifferentState || nexterr != nil) {
-		log.Fatal("city is not valid")
-		return false
+	if strings.ContainsAny(",", input) {
+		if !validateSameNameCityDifferentState || nexterr != nil {
+			log.Fatal("city isn't in proper format")
+			return false
+		}
+	} else {
+		if !validateCity || err != nil {
+			log.Fatal("city is either empty or wrong format (A-Z) only")
+			return false
+		}
 	}
 
 	return true
