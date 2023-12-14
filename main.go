@@ -64,7 +64,7 @@ func start(w http.ResponseWriter, r *http.Request) {
 }
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
-	//tmpl := template.Must(template.ParseFiles("./src/pages/index.html"))
+	//errorTmpl := template.Must(template.ParseFiles("./src/pages/error.html"))
 	inputToParse := r.URL.Query().Get("city")
 	if inputToParse == "" {
 		return
