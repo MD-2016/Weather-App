@@ -26,7 +26,7 @@ func ValidateInput(input string) bool {
 		return inputCorrect
 	}
 
-	if len(input) == 3 && strings.ToUpper(input) == input {
+	if strings.ToUpper(input) == input && len(input) == 3 {
 		inputCorrect = ValidateAirportCode(input)
 		return inputCorrect
 	}
@@ -61,7 +61,7 @@ func ValidateAirportCode(input string) bool {
 func ValidateCity(input string) bool {
 	//validateCity, err := regexp.MatchString("^[A-Za-z]+$", input)
 	//validateSameNameCityDifferentState, nexterr := regexp.MatchString("^[A-Za-z]+,\\s*[A-Za-z]{2}$", input)
-	validateCityUpdated, _ := regexp.MatchString("^[A-Za-z]+,?\\s*[A-Za-z]{2}$", input)
+	_, err := regexp.MatchString("^[A-Za-z]+,(,\\s*[A-Za-z]{2})?$", input)
 
 	/*
 		if strings.ContainsAny(",", input) {
@@ -77,7 +77,7 @@ func ValidateCity(input string) bool {
 		}
 	*/
 
-	if !validateCityUpdated {
+	if err != nil {
 		log.Fatal("city isnt correct")
 		return false
 	}
