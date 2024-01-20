@@ -8,6 +8,7 @@ import (
 
 	"github.com/MD-2016/Weather-App/src/server/formatinput"
 	"github.com/MD-2016/Weather-App/src/server/model"
+	"github.com/didip/tollbooth/v7"
 )
 
 type FormInput struct {
@@ -47,12 +48,15 @@ func main() {
 	// get return object
 
 	// display results on city page
+	limiter := tollbooth.NewLimiter(1, nil)
+	limiter.SetMessage("Only allowed a few requests at a time. Please wait")
+	limiter.SetStatusCode(404)
 	http.HandleFunc("/", start)
 	styles := http.FileServer(http.Dir("./src/assets/styles"))
 	http.Handle("/styles/", http.StripPrefix("/styles/", styles))
-	//http.Handle("/search", tollbooth.LimitFuncHandler(lmt, searchHandler))
-	http.HandleFunc("/search", searchHandler)
-	http.HandleFunc("/search/{city}", searchHandler)
+	http.Handle("/search", tollbooth.LimitFuncHandler(limiter, searchHandler))
+	//http.HandleFunc("/search", searchHandler)
+	//http.HandleFunc("/search/{city}", searchHandler)
 	//http.HandleFunc("/search/", searchCityHandler)
 	http.ListenAndServe(":8080", nil)
 
