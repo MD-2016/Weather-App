@@ -5,10 +5,12 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/MD-2016/Weather-App/src/server/formatinput"
 	"github.com/MD-2016/Weather-App/src/server/model"
 	"github.com/didip/tollbooth/v7"
+	"github.com/didip/tollbooth/v7/limiter"
 )
 
 type FormInput struct {
@@ -48,9 +50,9 @@ func main() {
 	// get return object
 
 	// display results on city page
-	limiter := tollbooth.NewLimiter(1, nil)
+	limiter := tollbooth.NewLimiter(1, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Second})
 	limiter.SetMessage("Only allowed a few requests at a time. Please wait")
-	limiter.SetStatusCode(404)
+	limiter.SetStatusCode(429)
 	http.HandleFunc("/", start)
 	styles := http.FileServer(http.Dir("./src/assets/styles"))
 	http.Handle("/styles/", http.StripPrefix("/styles/", styles))

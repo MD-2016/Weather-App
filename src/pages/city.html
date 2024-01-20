@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/styles.css">
-    <link rel="stylesheet" href="/styles/pico-1.5.9/css/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pico-1.5.9/css/pico.min.css">
     <title>{{.Location.Name}} Forecast</title>
 </head>
 <body>
     <div class="wrapper">
-        <div class="sidebar">
-            <p>Generated text</p>
-        </div>
         <div class="body">
             <section class="header">
-                <div class="selectedCity">{{.Location.Name}}</div>
+                <p class="selectedCity">{{.Location.Name}}</p>
             </section>
             <section class="tabs">
                 <details>
