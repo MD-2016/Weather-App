@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pico-1.5.9/css/pico.min.css">
+    <title>{{.Location.Name}} Forecast</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="body">
+            <section class="header">
+                <p class="selectedCity">{{.Location.Name}}</p>
+            </section>
+            <section class="tabs">
+                <details>
+                    <summary>Current</summary>
+                    <table>
+                    <tr>
+                        <th>Temperature</th>
+                        <th>Condition</th>
+                    </tr>
+                    <tr>
+                        <td>{{.Current.TempF}} / {{.Current.TempC}}</td>
+                        <td>
+                            {{.Current.Condition.Text}} <img alt="condition" src="{{.Current.Condition.Icon}}" />
+                        </td>
+                    </tr>
+                    </table>
+                </details>
+                <details>
+                    <summary>Hourly</summary>
+                    <table>
+                        <tr>
+                            <th>Time</th>
+                            <th>Temperature</th>
+                            <th>Condition</th>
+                        </tr>
+                        {{range $forecast := .Forecast.ForecastDay}}
+                            {{range $hourly := $forecast.Hour}}
+                            <tr>
+                                <td>{{$hourly.Time}}</td>
+                                <td>{{$hourly.TempF}} / {{$hourly.TempC}}</td> 
+                                <td>{{$hourly.Condition.Text}}  <img src="{{$hourly.Condition.Icon}}" alt="{{$hourly.Condition.Text}}" /></td>
+                            </tr>
+                            {{end}}
+                            {{end}}
+                    </table>
+                </details>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
