@@ -10,9 +10,10 @@ body {
    min-height: 100%;
 }
 
-.container {  display: grid;
+.container {  
+    
+    display: grid;
     grid-template-columns: 0fr 1fr 0fr;
-    grid-template-rows: 0.25fr 1fr 0.25fr;
     gap: 66px 0px;
     grid-auto-flow: row;
     justify-items: center;
@@ -25,6 +26,16 @@ body {
   .header { grid-area: header; }
   
   .weather { grid-area: weather; }
+
+  .hour {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .hourly {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   
 
 .selectedCity {
