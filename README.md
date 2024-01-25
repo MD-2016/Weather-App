@@ -18,14 +18,11 @@ The approach to building this app is to pull data from a third party weather api
 4. [SQLlite](https://www.sqlite.org)
 
 ## Project Goals
-- [ ] Get the Api key and practice a call to the service
-- [ ] Setup the sql lite database
-- [ ] Setup the HTML pages
-- [ ] Setup the design with pico css
-- [ ] Pull forecast data from api
-- [ ] Format the api request result into proper format for the user with icons and a weather report
-- [ ] Store the user's favorite locations with some limit
-- [ ] Add additional reports of weather forecasts depending on the api rules (free tier)
+- [x] Get the Api key and practice a call to the service
+- [x] Setup the HTML pages
+- [x] Setup the design with pico css
+- [x] Pull forecast data from api
+- [x] Format the api request result into proper format for the user with icons and a weather report
 
 ## Findings
 
