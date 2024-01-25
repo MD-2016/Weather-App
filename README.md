@@ -15,7 +15,6 @@ The approach to building this app is to pull data from a third party weather api
 1. [Go](https://go.dev) for backend
 2. HTML
 3. [Pico Css](https://picocss.com)
-4. [SQLlite](https://www.sqlite.org)
 
 ## Project Goals
 - [x] Get the Api key and practice a call to the service
